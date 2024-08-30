@@ -1,5 +1,7 @@
-# FomoWell 
-## Endpoint 1: create_fomo
+# FomoWell
+## FomoWell Launcher 
+The Launcher is used to launch the Fomowell project and searching FOMO projects.
+### Endpoint 1: create_fomo
 * Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
 * Candid:
 ```candid
@@ -48,7 +50,7 @@
 
 
 
-## Endpoint 2: edit_user
+### Endpoint 2: edit_user
 
 * Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
 * Candid:
@@ -69,7 +71,7 @@
 | 1     | result | Edit user principal ID |
 
 
-## Endpoint 3: get_addr_config
+### Endpoint 3: get_addr_config
 
 * Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
 * Candid:
@@ -89,7 +91,7 @@
 
 
 
-## Endpoint 4: get_buy_or_sell
+### Endpoint 4: get_buy_or_sell
 
 * Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
 * Candid:
@@ -112,7 +114,7 @@
 | 7     | user_avatar        | User avatar(Hash)           |
 | 8     | swap_timestamp     | Transaction timestamp           |
 
-## Endpoint 5: get_fomo_by_fomo_idx
+### Endpoint 5: get_fomo_by_fomo_idx
 * Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
 * Candid:
 ```candid
@@ -150,7 +152,7 @@
 | 21    | recently_bump_time  | Time of the most recent bump     |
 
 
-## Endpoint 6: get_fomo_by_fomo_pid
+### Endpoint 6: get_fomo_by_fomo_pid
 * Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
 * Candid:
 ```candid
@@ -188,7 +190,7 @@
 | 21    | recently_bump_time  | Time of the most recent bump     |
 
 
-## Endpoint 7: get_fomo_by_index 
+### Endpoint 7: get_fomo_by_index 
 * Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
 * Candid:
 ```candid
@@ -229,3 +231,294 @@
 | 22    |                | recently_reply_time |  Time of the most recent comment|
 | 23    |                | recently_bump_time | Time of the most recent bump  |
 
+
+
+### Endpoint 8: get_fomo_context
+* Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
+* Candid:
+```candid
+   () -> (Context) query;
+```
+* Request parameters:
+* Response parameters:
+
+| Order | Field1               | Field2             | Description                                       |
+|-------|----------------------|--------------------|---------------------------------------------------|
+| 1     | owner                |                    | FOMO Owner's PID                              |
+| 2     | fomo_canister_template |                    | Null         |
+| 3     | icp_addr             |          | ICP canisterID                                       |
+| 4     | god_of_wells_idx     |                    | God of wells ID                                |
+| 5     | last_buy_sell_op     | fomo_idx           | Last buy or sell FOMO ID                 |
+| 6     |                      | fomo_ticker        | Last buy or sell FOMO ticker              |
+| 7     |                      | icp_amount         | ICP amount of the last transaction               |
+| 8     |                      | buy_sell_op        | Type of the last transaction (buy or sell)      |
+| 9     |                      | op_user_pid       | Principal ID of the user who made the last op   |
+| 10    |                      | user_name          | Username of the user who made the last operation |
+| 11    |                      | user_avatar        | Avatar of the user who made the last op     |
+| 12    |                      | swap_timestamp     | Timestamp of the last swap operation             |
+| 13    | last_create_fomo    | fomo_idx           | Index of the last created FOMO project          |
+| 14    |                      | fomo_name          | Name of the last created FOMO project            |
+| 15    |                      | token_logo         | Logo URL of the last created FOMO project        |
+| 16    |                      | op_user_pid       | Principal ID of the creator of the last FOMO    |
+| 17    |                      | user_name          | Username of the creator of the last FOMO project |
+| 18    |                      | user_avatar        | Avatar of the creator of the last FOMO      |
+| 19    |                      | create_time        | Timestamp when the last FOMO project was created |
+
+
+### Endpoint 9: get_god_of_wells
+* Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
+* Candid:
+```candid
+  () -> (opt FomoProject) query;
+```
+* Request parameters:
+* Response parameters:
+
+| Order | Name               | Description                        |
+|-------|--------------------|------------------------------------|
+| 1     | fomo_idx           | Fomo ID                |
+| 2     | name               | Fomo name                      |
+| 3     | ticker             | Fomo ticker                    |
+| 4     | description        | Fomo description              |
+| 5     | img_url            | Fomo image URL                |
+| 6     | twitter_link       | Fomo twitter link             |
+| 7     | telegram_link      | Fomo telegram link            |
+| 8     | website            | Fomo official website         |
+| 9     | token_pid          | Token principal ID               |
+| 10    | pool_pid           | Pool principal ID                |
+| 11    | fomo_pid           | Fomo principal ID                |
+| 12    | pool_progress       | Pool progress                    |
+| 13    | pool_progress_done_time | Pool progress completion time |
+| 14    | god_of_wells_progress | God of wells progress          |
+| 15    | god_of_wells_time  | God of wells completion time     |
+| 16    | market_cap         | Market capitalization           |
+| 17    | create_time        | Creation timestamp               |
+| 18    | create_user_pid    | Creator's principal ID          |
+| 19    | reply_count        | Reply count                      |
+| 20    | recently_reply_time| Recent reply timestamp          |
+| 21    | recently_bump_time | Recent bump timestamp            |
+
+### Endpoint 10: get_points_history_by_index
+* Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
+* Candid:
+```candid
+  get_points_history_by_index : (nat64, nat64) -> (  vec record { nat64; PointHistory }, ) query;
+```
+* Request parameters:
+
+| Order | Field   | Description                    |
+|-------|---------|--------------------------------|
+| 1     | start   | Starting index of the query    |
+| 2     | limit   | Maximum number of items to return |
+
+* Response parameters:
+
+| Order | Field1          | Field2          | Description                        |
+|-------|------------------|------------------|------------------------------------|
+| 1     | id              |                 | Unique identifier for the record  |
+| 2     | point_history   | time            | Timestamp of the point history    |
+| 3     |                 | idx             | Index of the point history        |
+| 4     |                 | user_pid        | User's principal ID               |
+| 5     |                 | op_type         | Operation type (add or deduct)    |
+| 6     |                 | busi_name       | Business name                     |
+| 7     |                 | amount          | Amount (can be null if not set)  |
+
+### Endpoint 11: get_user
+* Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
+* Candid:
+```candid
+  (principal) -> (opt UserProfile) query;
+```
+* Request parameters:
+
+| Order | Field   | Description                    |
+|-------|---------|--------------------------------|
+| 1     | user_pid   | userid    |
+
+* Response parameters:
+
+| Order | Field1                 | Field2       | Description                        |
+|-------|------------------------|--------------|------------------------------------|
+| 1     | user_pid               |              | User's principal ID               |
+| 2     | user_name              |              | User's display name               |
+| 3     | avatar                 |              | User's avatar         |
+| 4     | last_change_time       |              | Timestamp of last change         |
+| 5     | user_points            |              | Current user points               |
+| 6     | user_pre_reward_points |              | Previous reward points (can be null) |
+| 7     | user_all_spend_points  |              | Total points spent (can be null)   |
+
+
+### Endpoint 12: search_fomos
+* Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
+* Candid:
+```candid
+  (SearchParam) -> (FomoProjectSearchVo) query;
+```
+
+* Request parameters:
+
+| Order | Field | Description                                 |
+|-------|-------|---------------------------------------------|
+| 1     | text  | Search keyword                              |
+| 2     | start | Starting index of results                  |
+| 3     | limit | Maximum number of results to return        |
+| 4     | order | Sorting order (ascending or descending)    |
+| 5     | sort  | Sorting criteria (bump order, last reply, reply count, market cap, creation time) |
+
+
+* Response parameters:
+
+| Order | Field1   | Field2   | Description                          |
+|-------|----------|----------|--------------------------------------|
+| 1     | start    |          | Starting index of the list           |
+| 2     | end      |          | Ending index of the list             |
+| 3     | fomo_vec | fomo_idx| Fomo index                           |
+| 4     |          | name     | Fomo name                         |
+| 5     |          | ticker   | Fomo ticker code                  |
+| 6     |          | description | Fomo description                |
+| 7     |          | img_url  | Fomo image URL                   |
+| 8     |          | twitter_link | Fomo twitter link               |
+| 9     |          | telegram_link | Fomo telegram link              |
+| 10    |          | website  | Fomo official website            |
+| 11    |          | token_pid | Fomo token principal ID          |
+| 12    |          | pool_pid | Fomo pool principal ID            |
+| 13    |          | fomo_pid | Fomo fomo principal ID            |
+| 14    |          | pool_progress | Pool progress                     |
+| 15    |          | pool_progress_done_time | Pool progress completion time |
+| 16    |          | god_of_wells_progress | God of wells progress        |
+| 17    |          | god_of_wells_time | God of wells completion time     |
+| 18    |          | market_cap | Market capitalization              |
+| 19    |          | create_time | Creation timestamp                 |
+| 20    |          | create_user_pid | Creator's principal ID           |
+| 21    |          | reply_count | Reply count                         |
+| 22    |          | recently_reply_time | Recent reply timestamp         |
+| 23    |          | recently_bump_time | Recent bump timestamp           |
+
+### Endpoint 13: set_buy_or_sell
+* Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
+* Candid:
+```candid
+  set_buy_or_sell : (RecordSignal) -> ();
+```
+
+* Request parameters:
+
+| Order | Field          | Description                 |
+|-------|----------------|------------------------------|
+| 1     | fomo_idx       | Fomo index                  |
+| 2     | icp_amount     | Icp amount                  |
+| 3     | buy_sell_op    | Operation type (buy or sell) |
+| 4     | swap_hash      | Swap transaction hash       |
+
+### Endpoint 14: spending_points
+* Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
+* Candid:
+```candid
+  (principal, text) -> ();
+```
+* Request parameters:
+
+| Order | Field          | Description                |
+|-------|----------------|-----------------------------|
+| 1     | user_pid       | User's principal identifier|
+| 2     | busi_name      | Business name              |
+
+
+### Endpoint 15: topup_points
+* Canister PID: 52g6a-iaaaa-aaaam-acsza-cai
+* Candid:
+```candid
+  topup_points : (nat) -> (Result_2);
+```
+* Request parameters:
+
+| Order | Field          | Description                |
+|-------|----------------|----------------------------|
+| 1     | points_amount  | Points amount              |
+
+
+## Fomowell Project
+The Fomowell project contract is generated by the Fomowell launcher and is used to store information such as comments and holding lists.
+### Endpoint 1: add_comment
+* Canister PID: ${FOMO_PID}
+* Candid:
+```candid
+  add_comment : (CommentsCreate) -> (Result); cycles : () -> (nat64) query;
+```
+
+* Request parameters:
+
+| Order | Field1       | Field2          | Description                      |
+|-------|--------------|------------------|----------------------------------|
+| 1     | content      |                 | Comment content                  |
+| 2     | image_url    |                 | Image URL (can be null if no image) |
+| 3     | extended     | key             | Hashmap, key for extended information   |
+| 4     |              | value           | Value for extended information   |
+
+
+## Endpoint 2: get_comments_by_index
+* Canister PID: ${FOMO_PID}
+* Candid:
+```candid
+  get_comments_by_index : (Page) -> (CommentsVo) query;
+```
+* Request parameters:
+
+| Order | Field   | Description                 |
+|-------|---------|------------------------------|
+| 1     | start   | Starting index of pagination |
+| 2     | limit   | Maximum number of items per page |
+
+* Response parameters:
+
+| Order | Field1       | Field2               | Field3          | Description                        |
+|-------|--------------|---------------------|------------------|------------------------------------|
+| 1     | start_idx    |                     |                  | Starting index of the list        |
+| 2     | end_idx      |                     |                  | Ending index of the list          |
+| 3     | fomo_vec     | fomo_idx            |                  | Fomo index                         |
+| 4     |              | comment_idx         |                  | Comment index                      |
+| 5     |              | user_pid            |                  | User's principal ID               |
+| 6     |              | content             |                  | Comment content                    |
+| 7     |              | user_star           |                  | List of stargazer user principal IDs |
+| 8     |              | image_url           |                  | Image URL (can be null)           |
+| 9     |              | create_time         |                  | Creation timestamp                 |
+| 10    |              | extended            | key              | Hashmap, key for extended information     |
+| 11    |              |                     | value            | Value for extended information    |
+
+## Endpoint 3: get_comments_len
+* Canister PID: ${FOMO_PID}
+* Candid:
+```candid
+  get_comments_len : () -> (nat) query;
+```
+* Response parameters: 
+
+| Order | Field   | Description                 |
+|-------|---------|------------------------------|
+| 1     | num   | Number of Comments |
+
+## Endpoint 4: get_fomo_info
+* Canister PID: ${FOMO_PID}
+* Candid:
+```candid
+  get_fomo_info : () -> (vec record { text; text }) query;
+```
+* Request parameters:
+* Response parameters: HashMap<String,String>
+
+## Endpoint 5: get_top10_holders
+* Canister PID: ${FOMO_PID}
+* Candid:
+```candid
+  get_top10_holders : () -> (vec HolderInfo) query;
+```
+* Request parameters:
+* Response parameters:
+
+| Order | Field1       | Field2               | Description                        |
+|-------|--------------|----------------------|------------------------------------|
+| 1     | account      | owner                | User PID              |
+| 2     |              | subaccount           | Subaccount identifier |
+| 3     | amount       |                      | Amount of holding                  |
+| 4     | holder_percent|                     | Holding percentage                 |
+| 5     | holder_type  |                      | Holder type description            |
